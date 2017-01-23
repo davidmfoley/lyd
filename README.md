@@ -29,7 +29,7 @@ Create symlinks in `{pwd}/node_modules` to all of the packages specified in the 
 
 ### Example usage
 
-```
+```shell
 $ cd ~/src/monorepo
 $ ls
 monorepo-api monorepo-user-auth
@@ -49,7 +49,7 @@ $ cat package.json
 $ lyd  # install links to dependencies in node_mdules
 
 $ ls -al node_modules/monorepo-user-auth
-lrwxr-xr-x  1 user  gropu  50 Jan 23 08:45 node_modules/monorepo-user-auth -> /Users/user/src/monorepo/monorepo-user-auth
+lrwxr-xr-x  1 user  group  50 Jan 23 08:45 node_modules/monorepo-user-auth -> /Users/user/src/monorepo/monorepo-user-auth
 <Paste>
 
 
