@@ -1,0 +1,65 @@
+#! /usr/bin/env node
+'use strict';
+
+const child_process = require('child_process');
+const fs = require('fs');
+const path = require('path');
+const watchr = require('watchr');
+
+let tasks = [];
+let state = 'idle';
+
+addWatcher('./src', 'build', 'test');
+addWatcher('./test', 'test');
+
+function addWatcher(path, ...names) {
+  watchr.open(
+    path,
+    (changeType, filePath, fileCurrentStat, filePreviousStat) => {
+      names.forEach(enqueue);
+      startNextIfIdle();
+    },
+    (err) => {
+      if (err) return console.error('Error:', err);
+      console.log(`watching ${path} - ${names.join(', ')}`);
+    }
+  );
+}
+
+function enqueue(task) {
+  const exists = !!tasks.filter(existing => existing === task).length;
+  if (!exists) {
+    tasks.push(task);
+  }
+}
+
+function startNextIfIdle() {
+  if (!tasks.length) return;
+  if (state !== 'idle') return;
+
+  spawnTask(tasks.shift());
+}
+
+function spawnTask(name) {
+  state = 'running';
+
+  const opts = {
+    cwd: __dirname,
+    env: process.env,
+    stdio: 'inherit'
+  };
+
+  console.log('>  yarn run ' +  name + ' -s');
+  child_process.spawn('yarn', ['run', name, '-s'], opts).on('close', function (code) {
+    if (code === 0 ) {
+      console.log('SUCCESS');
+    }
+    else {
+      console.log('FAILURE ', code);
+    }
+
+    state = 'idle';
+    setImmediate(startNextIfIdle);
+  });
+}
+
