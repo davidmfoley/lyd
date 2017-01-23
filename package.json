@@ -1,13 +1,14 @@
 {
   "name": "lyd",
-  "version": "1.0.0",
-  "description": "Linked Yarn Dependency Tool",
+  "version": "0.1.0",
+  "description": "Linked Yarn Dependences",
   "main": "lib/index.js",
   "repository": "http://github.com/davidmfoley/lyd",
   "bin": {
     "lyd": "lib/cli.js"
   },
   "scripts": {
+    "prepublish": "yarn run build",
     "test": "yarn run test:mocha && yarn run test:flow && yarn run test:lint",
     "test:flow": "flow",
     "test:mocha": "mocha --compilers js:babel-register test/",
