@@ -1,0 +1,44 @@
+{
+  "name": "lyd",
+  "version": "1.0.0",
+  "description": "Linked Yarn Dependency Tool",
+  "main": "lib/index.js",
+  "repository": "http://github.com/davidmfoley/lyd",
+  "bin": {
+    "lyd": "lib/cli.js"
+  },
+  "scripts": {
+    "test": "yarn run test:mocha && yarn run test:flow && yarn run test:lint",
+    "test:flow": "flow",
+    "test:mocha": "mocha --compilers js:babel-register test/",
+    "test:lint": "eslint src/",
+    "build": "yarn run build:clean && yarn run build:lib",
+    "build:clean": "rimraf lib",
+    "build:lib": "babel -d lib --ignore '**/*.test.js' src"
+  },
+  "devDependencies": {
+    "babel-cli": "^6.18.0",
+    "babel-core": "^6.21.0",
+    "babel-plugin-transform-flow-strip-types": "^6.21.0",
+    "babel-preset-es2015": "^6.18.0",
+    "babel-register": "^6.18.0",
+    "chai": "^3.5.0",
+    "eslint": "^3.12.2",
+    "flow": "^0.2.3",
+    "flow-bin": "^0.37.4",
+    "flow-copy-source": "^1.1.0",
+    "mocha": "^3.2.0",
+    "sinon": "^1.17.7",
+    "sinon-as-promised": "^4.0.2",
+    "sinon-chai": "^2.8.0",
+    "watchr": "^3.0.1"
+  },
+  "author": "Dave Foley (davidmfoley@gmail.com)",
+  "license": "MIT",
+  "dependencies": {
+    "debug": "^2.6.0",
+    "es6-promisify": "^5.0.0",
+    "mkdirp": "^0.5.1",
+    "rimraf": "^2.5.4"
+  }
+}
