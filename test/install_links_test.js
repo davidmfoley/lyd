@@ -53,7 +53,7 @@ describe('remove', () => {
     });
 
     it('unlinks first if exists', () => {
-      const err = new Error();
+      const err: any = new Error();
       err.code = 'EEXIST';
       io.symlink.onCall(0).rejects(err);
       io.unlink.resolves();
