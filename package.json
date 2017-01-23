@@ -1,6 +1,6 @@
 {
   "name": "lyd",
-  "version": "0.1.0",
+  "version": "0.1.1",
   "description": "Linked Yarn Dependences",
   "main": "lib/index.js",
   "repository": "http://github.com/davidmfoley/lyd",
