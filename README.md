@@ -1,9 +1,23 @@
 ## LYD: Linked Yarn Dependencies
 
 When working on a "monorepo" node application - a single repo that contains many interdependent packages - it is a pain to deal with the dependencies between them.
-`lyd` is a simple tool to make managing local dependencies between packages.
+
+`lyd` is a simple tool to help with managing local dependencies between packages.
+
+I created it to work around issues I had while working with yarn, but you can also use it with npm if you like.
+
+## How it works
 
 lyd stores information about linked packages in a new key in package.json named `linkedDependencies`.
+
+## Installation
+
+You can install lyd locally in your project, in the root of your monorepo, or globally.
+Personally, I try to minimize global package install, but it's your life.
+
+If you like, you can add lyd as a preinstall or postinstall step in package.json, so that it is run before/after `npm install` or `yarn install`.
+
+## Commands
 
 `lyd` has three commands:
 
