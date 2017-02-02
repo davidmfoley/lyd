@@ -1,5 +1,6 @@
 // @flow
 
+const chalk = require('chalk');
 const nativeFS = require('fs');
 const path = require('path');
 const promisify = require('es6-promisify');
@@ -25,7 +26,13 @@ function getPackagePath(cwd) {
   return path.join(cwd, 'package.json');
 }
 
+function log(...messages: string[]): void {
+  // eslint-disable-next-line no-console
+  console.log(chalk.blue(...messages));
+}
+
 const IO: HandlerIO = {
+  log,
   readFile,
   writeFile,
   symlink,

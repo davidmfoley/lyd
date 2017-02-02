@@ -11,6 +11,7 @@ module.exports = {
 
 function fakeHandlerIO(): HandlerIO {
   return {
+    log: sinon.stub(),
     readFile: sinon.stub(),
     writeFile: sinon.stub(),
     symlink: sinon.stub(),

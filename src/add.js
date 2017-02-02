@@ -7,7 +7,7 @@ module.exports = (io: HandlerIO) => (params: HandlerParams) => {
   const cwd = params.cwd;
 
   return io.readPackageJson(cwd).then(contents => {
-    const linkedDependencies = Object.assign({}, contents.linkedDependencies || {});
+    const linkedDependencies: Object = Object.assign({}, (contents.linkedDependencies: Object) || {});
 
     if (params.args.length > 1) return Promise.reject(new Error('multiple links not yet supported'));
 

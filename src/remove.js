@@ -1,4 +1,5 @@
 // @flow
+
 import type { HandlerIO, HandlerParams } from './types';
 
 module.exports = (io: HandlerIO) => (params: HandlerParams) => {

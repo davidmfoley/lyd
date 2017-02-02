@@ -7,19 +7,17 @@ import type {Handler} from './types';
 const [command, ...args] = process.argv.slice(2);
 main(command, args || []);
 
-
 function main(command, args) {
   let action = getAction(command);
-
-  if (!action) {
-    console.error('unknown command:', command);
-    process.exit(2);
-    return; // thanks flowbama
-  }
-
   const cwd = process.cwd();
   const io = require('./io');
   const params = { cwd, args };
+
+  if (!action) {
+    require('./print_usage')(io, command);
+    process.exit(2);
+    return; // thanks flowbama
+  }
 
   action(io)(params).then(() => {
     process.exit(0);
@@ -29,7 +27,7 @@ function main(command, args) {
   });
 }
 
-function getAction(command): Handler {
+function getAction(command: string): ?Handler {
   if (command === 'install' || !command) {
     return require('./install_links');
   }

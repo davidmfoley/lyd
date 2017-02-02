@@ -13,11 +13,12 @@ module.exports = (io: HandlerIO) => (params: HandlerParams) => {
 
   return io.readPackageJson(cwd).then(contents => {
     const linkedDependencies = contents.linkedDependencies || {};
-    if (Object.keys(linkedDependencies).length === 0) return Promise.resolve();
+    const names = Object.keys(linkedDependencies);
+    if (names.length === 0) return Promise.resolve();
 
     let promise = mkdirp(path.join(cwd, 'node_modules'));
 
-    Object.keys(linkedDependencies).forEach(name => {
+    names.forEach(name => {
       promise = promise.then(() => handlePackage(name));
     });
 
